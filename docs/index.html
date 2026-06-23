@@ -42,11 +42,16 @@
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
   .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .nav-brand span.icon { font-size: 26px; }
+  .nav-brand img.logo-app { height: 34px; width: 34px; object-fit: contain; }
   .nav-brand span.name {
     font-size: 18px; font-weight: 700; color: white;
     letter-spacing: -0.3px;
   }
+  .nav-sedcaf {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-sedcaf img { height: 32px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.85; }
+  .nav-sedcaf span { font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a {
     color: rgba(255,255,255,0.8); text-decoration: none;
@@ -371,7 +376,7 @@
 <!-- NAV -->
 <nav>
   <a class="nav-brand" href="#">
-    <span class="icon">🌲</span>
+    <img class="logo-app" src="assets/icon_white.png" alt="SilvaDesk Pro">
     <span class="name">SilvaDesk Pro</span>
   </a>
   <ul class="nav-links">
@@ -380,12 +385,36 @@
     <li><a href="#precios">Precios</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <a class="nav-cta" href="#precios">Obtener Licencia</a>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <div class="nav-sedcaf">
+      <img src="assets/logo.png" alt="SEDCAF">
+      <span>por SEDCAF</span>
+    </div>
+    <a class="nav-cta" href="#precios">Obtener Licencia</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
+
+    <!-- Logos en el hero -->
+    <div style="display:flex; align-items:center; justify-content:center; gap:28px; margin-bottom:28px; animation: fadeDown 0.5s ease;">
+      <div style="text-align:center;">
+        <img src="assets/icon_white.png" alt="SilvaDesk Pro"
+             style="height:80px; width:80px; object-fit:contain;
+                    filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4));">
+        <div style="font-size:11px; color:rgba(255,255,255,0.55); margin-top:6px; font-weight:500; letter-spacing:0.5px;">SILVADESK PRO</div>
+      </div>
+      <div style="width:1px; height:60px; background:rgba(255,255,255,0.2);"></div>
+      <div style="text-align:center;">
+        <img src="assets/logo.png" alt="SEDCAF"
+             style="height:72px; object-fit:contain;
+                    filter:brightness(0) invert(1) drop-shadow(0 4px 12px rgba(0,0,0,0.35));">
+        <div style="font-size:11px; color:rgba(255,255,255,0.55); margin-top:6px; font-weight:500; letter-spacing:0.5px;">SEDCAF · HONDURAS</div>
+      </div>
+    </div>
+
     <div class="badge-hero">🇭🇳 Hecho en Honduras para profesionales forestales</div>
     <h1>Gestión forestal<br><span>profesional</span>, todo en uno.</h1>
     <p>Software especializado para ingenieros forestales, regentes y empresas consultoras registradas en COLPROFORH.</p>
@@ -402,7 +431,7 @@
         <div class="dot dot-r"></div>
         <div class="dot dot-y"></div>
         <div class="dot dot-g"></div>
-        <span class="screen-title">SilvaDesk Pro v1.1.0 · SEDCAF</span>
+        <span class="screen-title">SilvaDesk Pro v1.2.0 · SEDCAF</span>
       </div>
       <div class="screen-body">
         <div class="mini-card">
@@ -496,7 +525,7 @@
                 transition: background 0.2s;"
          onmouseover="this.style.background='#0D6B0D'"
          onmouseout="this.style.background='var(--verde)'">
-        ⬇️ Descargar SilvaDesk Pro v1.1.0
+        ⬇️ Descargar SilvaDesk Pro v1.2.0
       </a>
       <p style="margin-top:12px; font-size:13px; color:var(--muted);">
         Windows 10 / 11 &nbsp;·&nbsp; ~50 MB &nbsp;·&nbsp; 15 días gratis &nbsp;·&nbsp;
@@ -718,8 +747,16 @@
 
 <!-- FOOTER -->
 <footer>
+  <div style="display:flex; align-items:center; justify-content:center; gap:24px; margin-bottom:14px;">
+    <img src="assets/icon_white.png" alt="SilvaDesk Pro"
+         style="height:38px; width:38px; object-fit:contain; opacity:0.7;">
+    <div style="width:1px; height:30px; background:rgba(255,255,255,0.15);"></div>
+    <img src="assets/logo.png" alt="SEDCAF"
+         style="height:34px; object-fit:contain;
+                filter:brightness(0) invert(1); opacity:0.7;">
+  </div>
   <p>
-    <strong style="color:rgba(255,255,255,0.8)">SilvaDesk Pro v1.1.0</strong> ·
+    <strong style="color:rgba(255,255,255,0.8)">SilvaDesk Pro v1.2.0</strong> ·
     SEDCAF – Servicios de Consultoría y Asesoría Forestal · Honduras<br>
     Ing. FERNANDO RAFAEL ARDÓN RODRÍGUEZ · COLPROFORH N.° 0226<br>
     <a href="https://github.com/frardonr6/SilvaDeskPro">GitHub</a> ·
