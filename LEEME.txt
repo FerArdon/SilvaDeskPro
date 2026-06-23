@@ -1,0 +1,81 @@
+═══════════════════════════════════════════════════════════════
+  SilvaDesk Pro v1.1.0
+  Sistema de Gestión Forestal Profesional
+  SEDCAF · Sección Técnica Ambiental · FEMA Honduras
+  COLPROFORH Arancel 2024 – La Gaceta No. 36,609
+═══════════════════════════════════════════════════════════════
+
+MÓDULOS INCLUIDOS
+─────────────────
+  📜 Protocolo      – Registro formal de actuaciones técnicas
+                      (Actas de ministro de fe, valor jurídico)
+  🧾 Facturador     – Generación de facturas PDF con CAI, ISV 15%
+                      e historial permanente de facturas emitidas
+  🌿 Calculadora    – Calculadora del Arancel COLPROFORH en tiempo real
+
+PASOS PARA USAR (primera vez)
+──────────────────────────────
+  1. Instalar Python (https://www.python.org/downloads/)
+     ► Marcar "Add Python to PATH"
+
+  2. Doble clic en:  1_INSTALAR.bat
+     (instala todas las dependencias automáticamente)
+
+  3. Doble clic en:  2_EJECUTAR.bat
+     (abre la aplicación)
+
+PARA CREAR UN .EXE STANDALONE (opcional)
+─────────────────────────────────────────
+  4. Doble clic en:  3_COMPILAR_EXE.bat
+     El .exe queda en la carpeta "dist\"
+     Puedes copiarlo a cualquier PC sin instalar Python.
+
+ESTRUCTURA DE CARPETAS
+───────────────────────
+  SilvaDesk Pro\
+  ├── main.py              ← Entrada principal
+  ├── db.py                ← Base de datos SQLite
+  ├── tabs\
+  │   ├── bitacora.py      ← Módulo Protocolo (ministro de fe)
+  │   ├── facturador.py    ← Módulo Facturador (con historial)
+  │   └── calculadora.py  ← Módulo Calculadora Arancel
+  ├── utils\
+  │   ├── pdf_invoice.py  ← Generador de PDF de facturas
+  │   └── pdf_acta.py     ← Generador de PDF de actas protocolo
+  ├── Facturas\            ← PDFs de facturas (se crea automáticamente)
+  ├── Actas\               ← PDFs de actas de protocolo
+  ├── SilvaDesk.db         ← Base de datos (se crea en el primer uso)
+  ├── 1_INSTALAR.bat       ← Instalar dependencias
+  ├── 2_EJECUTAR.bat       ← Ejecutar la app
+  └── 3_COMPILAR_EXE.bat   ← Generar .exe standalone
+
+HISTORIAL DE FACTURAS
+──────────────────────
+  Cada factura emitida queda registrada automáticamente en la BD
+  con: No. de factura, fecha, cliente, total, CAI y ruta del PDF.
+  Puedes consultarlo en el panel derecho del módulo Facturador.
+  El PDF se guarda en la carpeta "Facturas\" y se puede reabrir
+  en cualquier momento desde el historial.
+
+DATOS FISCALES REQUERIDOS (para facturas)
+──────────────────────────────────────────
+  Completa en el Facturador:
+  • RTN del emisor
+  • CAI (Código de Autorización de Impresión) – SAR Honduras
+  • Fecha límite de emisión del CAI
+  • Rango autorizado de facturación (inicio y fin)
+
+BASE LEGAL
+───────────
+  • Arancel COLPROFORH – La Gaceta No. 36,609 (10/08/2024)
+  • ISV 15%  → SAR Honduras
+  • ISR 12.5% → Art. 50 Ley ISR Honduras (no aparece en factura)
+  • CAI → Acuerdo SAR-DS-007-2019 (obligatorio en toda factura impresa)
+  • Regla 3×1 → PCM-002-2006
+  • Peritaje penal → CPP Art. 124 Honduras
+  • Ministro de fe → Código Forestal Honduras
+
+═══════════════════════════════════════════════════════════════
+  Ing. FERNANDO RAFAEL ARDON RODRIGUEZ
+  Sección Técnica Ambiental – Fiscalía de Medio Ambiente
+═══════════════════════════════════════════════════════════════
