@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SilvaDesk Pro – Sistema de Gestión Forestal | SEDCAF Honduras</title>
+<meta name="description" content="Software profesional de gestión forestal para ingenieros, regentes y consultores en Honduras. Facturador, Protocolo FEMA, Bitácora TFC, Calculadora COLPROFORH.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul:    #0078D4;
+    --azul-d:  #005FB8;
+    --azul-dd: #003A75;
+    --verde:   #107C10;
+    --verde-l: #16A316;
+    --gris:    #F3F5F7;
+    --texto:   #1A1A2E;
+    --muted:   #5A6478;
+    --blanco:  #FFFFFF;
+    --borde:   #DDE3EC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--blanco);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ─────────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 48px;
+    background: rgba(0,63,117,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-brand img.logo-app { height: 34px; width: 34px; object-fit: contain; }
+  .nav-brand span.name {
+    font-size: 18px; font-weight: 700; color: white;
+    letter-spacing: -0.3px;
+  }
+  .nav-sedcaf {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-sedcaf img {
+    height: 36px; object-fit: contain;
+  }
+  .nav-sedcaf span { font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    font-size: 14px; font-weight: 500; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: white; }
+  .nav-cta {
+    background: var(--azul); color: white; border: none;
+    padding: 9px 22px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #006BBF; }
+
+  /* ── HERO ─────────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #2E7D32 100%);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 120px 24px 80px;
+    position: relative; overflow: hidden;
+  }
+
+  /* partículas de fondo */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(0,120,212,0.25) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(16,124,16,0.2) 0%, transparent 50%);
+  }
+
+  /* grid sutil */
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 820px; }
+
+  .badge-hero {
+    display: inline-block; margin-bottom: 20px;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.9); padding: 6px 18px; border-radius: 999px;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.3px;
+    animation: fadeDown 0.6s ease;
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 72px); font-weight: 900;
+    color: white; line-height: 1.1; letter-spacing: -2px;
+    margin-bottom: 18px;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+  .hero h1 span { color: #4FC3F7; }
+
+  .hero p {
+    font-size: clamp(16px, 2vw, 20px); color: rgba(255,255,255,0.75);
+    line-height: 1.6; max-width: 600px; margin: 0 auto 36px;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+  .btn-primary {
+    background: var(--verde); color: white;
+    padding: 18px 40px; border-radius: 12px;
+    font-size: 17px; font-weight: 800; text-decoration: none;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(16,124,16,0.55);
+    animation: pulse-glow 2.4s ease-in-out infinite;
+  }
+  .btn-primary:hover { background: #0D6B0D; transform: translateY(-2px); animation-play-state: paused; }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 4px 24px rgba(16,124,16,0.55); }
+    50% { box-shadow: 0 4px 34px rgba(16,124,16,0.9); }
+  }
+  .btn-ghost {
+    background: rgba(255,255,255,0.1); color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 14px 32px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.18); }
+
+  /* pantalla flotante hero */
+  .hero-screen {
+    margin-top: 64px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px; padding: 20px;
+    backdrop-filter: blur(8px);
+    animation: fadeUp 0.8s ease 0.4s both;
+    max-width: 700px; margin-left: auto; margin-right: auto;
+  }
+  .screen-bar {
+    display: flex; gap: 6px; margin-bottom: 14px; align-items: center;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #FF5F57; }
+  .dot-y { background: #FEBC2E; }
+  .dot-g { background: #28C840; }
+  .screen-title {
+    font-size: 11px; color: rgba(255,255,255,0.4);
+    margin-left: 8px; font-family: 'JetBrains Mono', monospace;
+  }
+  .screen-body {
+    background: rgba(0,0,0,0.3); border-radius: 8px; padding: 16px 20px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .mini-card {
+    background: rgba(255,255,255,0.07); border-radius: 8px;
+    padding: 12px; border: 1px solid rgba(255,255,255,0.1);
+  }
+  .mini-card .mc-icon { font-size: 20px; margin-bottom: 4px; }
+  .mini-card .mc-label { font-size: 10px; color: rgba(255,255,255,0.6); }
+  .mini-card .mc-val {
+    font-size: 16px; font-weight: 700; color: white;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── STATS BAND ───────────────────────────────────────────── */
+  .stats-band {
+    background: var(--gris); border-top: 1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+  }
+  .stat-item {
+    padding: 28px 48px; text-align: center;
+    border-right: 1px solid var(--borde);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-size: 32px; font-weight: 900; color: var(--azul-d); }
+  .stat-lbl { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* ── SECCIONES ────────────────────────────────────────────── */
+  section { padding: 90px 24px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-tag {
+    display: inline-block; background: #E8F0FE; color: var(--azul-d);
+    padding: 4px 14px; border-radius: 999px; font-size: 12px;
+    font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-tag.green { background: #E6F4E6; color: var(--verde); }
+
+  h2 {
+    font-size: clamp(28px, 4vw, 44px); font-weight: 900;
+    letter-spacing: -1px; line-height: 1.15; margin-bottom: 12px;
+  }
+  .section-sub {
+    font-size: 17px; color: var(--muted); max-width: 560px;
+    line-height: 1.6; margin-bottom: 56px;
+  }
+
+  /* ── MÓDULOS GRID ─────────────────────────────────────────── */
+  .modulos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .mod-card {
+    background: white; border: 1px solid var(--borde);
+    border-radius: 14px; padding: 28px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .mod-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--azul);
+  }
+  .mod-card.green::before { background: var(--verde); }
+  .mod-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+  .mod-icon { font-size: 32px; margin-bottom: 14px; }
+  .mod-name { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .mod-desc { font-size: 14px; color: var(--muted); line-height: 1.5; }
+  .mod-tag {
+    display: inline-block; margin-top: 12px;
+    background: var(--gris); color: var(--muted);
+    padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 600;
+  }
+  .mod-tag.free { background: #E6F4E6; color: var(--verde); }
+
+  /* ── CARACTERÍSTICAS ──────────────────────────────────────── */
+  .features-bg { background: var(--gris); }
+  .features-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  @media(max-width:640px){ .features-grid { grid-template-columns: 1fr; } }
+  .feat {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: white; border-radius: 12px; padding: 20px;
+    border: 1px solid var(--borde);
+  }
+  .feat-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: #E8F0FE; display: flex; align-items: center;
+    justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .feat-icon.g { background: #E6F4E6; }
+  .feat-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .feat-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ── PRECIOS ──────────────────────────────────────────────── */
+  .precios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; align-items: start;
+  }
+  .precio-card {
+    background: white; border: 2px solid var(--borde);
+    border-radius: 18px; padding: 36px 28px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+  }
+  .precio-card.featured {
+    border-color: var(--azul);
+    box-shadow: 0 8px 40px rgba(0,120,212,0.18);
+    transform: scale(1.04);
+  }
+  .precio-card:hover { transform: translateY(-4px) scale(1.01); }
+  .precio-card.featured:hover { transform: translateY(-4px) scale(1.05); }
+  .badge-popular {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--azul); color: white;
+    padding: 4px 18px; border-radius: 999px; font-size: 12px; font-weight: 700;
+    white-space: nowrap;
+  }
+  .plan-icon { font-size: 36px; margin-bottom: 14px; }
+  .plan-name { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+  .plan-target { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+  .plan-price {
+    font-size: 44px; font-weight: 900; color: var(--azul-d);
+    letter-spacing: -2px; line-height: 1;
+  }
+  .plan-price span { font-size: 20px; font-weight: 700; vertical-align: super; }
+  .plan-usd { font-size: 13px; color: var(--muted); margin-top: 4px; margin-bottom: 24px; }
+  .plan-divider { border: none; border-top: 1px solid var(--borde); margin: 20px 0; }
+  .plan-feat { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .plan-feat li {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 14px; color: var(--muted);
+  }
+  .plan-feat li::before { content: '✓'; color: var(--verde); font-weight: 700; flex-shrink: 0; }
+  .plan-btn {
+    display: block; width: 100%; margin-top: 28px;
+    padding: 13px; border-radius: 10px; text-align: center;
+    font-size: 15px; font-weight: 700; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .plan-btn.primary {
+    background: var(--azul); color: white;
+    box-shadow: 0 4px 16px rgba(0,120,212,0.3);
+  }
+  .plan-btn.primary:hover { background: var(--azul-d); transform: translateY(-2px); }
+  .plan-btn.outline {
+    border: 2px solid var(--borde); color: var(--texto);
+  }
+  .plan-btn.outline:hover { border-color: var(--azul); color: var(--azul); }
+
+  .precio-nota {
+    text-align: center; margin-top: 28px;
+    font-size: 14px; color: var(--muted);
+  }
+  .precio-nota strong { color: var(--texto); }
+
+  /* ── CTA FINAL ────────────────────────────────────────────── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--azul-dd), #004F9F);
+    text-align: center; color: white;
+  }
+  .cta-section h2 { color: white; }
+  .cta-section p { color: rgba(255,255,255,0.75); font-size: 18px; margin: 12px auto 36px; max-width: 500px; }
+  .cta-contact {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
+    color: white; padding: 14px 28px; border-radius: 12px;
+    font-size: 16px; font-weight: 600; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cta-contact:hover { background: rgba(255,255,255,0.18); }
+  .btn-whatsapp {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; border: 2px solid #25D366;
+    color: #25D366; padding: 12px 26px; border-radius: 999px;
+    font-size: 16px; font-weight: 700; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-whatsapp:hover { background: rgba(37,211,102,0.12); transform: translateY(-2px); }
+
+  /* ── FOOTER ───────────────────────────────────────────────── */
+  footer {
+    background: #0D1B2A; color: rgba(255,255,255,0.5);
+    text-align: center; padding: 28px 24px; font-size: 13px;
+    line-height: 1.8;
+  }
+  footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+  footer a:hover { color: white; }
+
+  /* ── ANIMACIONES ──────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ───────────────────────────────────────────── */
+  @media(max-width:768px){
+    nav { padding: 12px 20px; }
+    .nav-links { display: none; }
+    .stat-item { padding: 20px 24px; }
+    section { padding: 60px 20px; }
+    .features-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <img class="logo-app" src="assets/icon_white.png" alt="SilvaDesk Pro">
+    <span class="name">SilvaDesk Pro</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#modulos">Módulos</a></li>
+    <li><a href="#caracteristicas">Características</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <div class="nav-sedcaf">
+      <img src="assets/logo_sedcaf.png?v=2" alt="SEDCAF">
+      <span>por SEDCAF</span>
+    </div>
+    <a class="nav-cta" href="#precios">Obtener Licencia</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+
+    <!-- Logos en el hero -->
+    <div style="display:flex; align-items:center; justify-content:center; gap:28px; margin-bottom:28px; animation: fadeDown 0.5s ease;">
+      <div style="text-align:center;">
+        <img src="assets/icon_white.png" alt="SilvaDesk Pro"
+             style="height:80px; width:80px; object-fit:contain;
+                    filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4));">
+        <div style="font-size:11px; color:rgba(255,255,255,0.55); margin-top:6px; font-weight:500; letter-spacing:0.5px;">SILVADESK PRO</div>
+      </div>
+      <div style="width:1px; height:60px; background:rgba(255,255,255,0.2);"></div>
+      <div style="text-align:center;">
+        <img src="assets/logo_sedcaf.png?v=2" alt="SEDCAF"
+             style="height:72px; object-fit:contain;
+                    filter:drop-shadow(0 4px 16px rgba(0,0,0,0.35));">
+        <div style="font-size:11px; color:rgba(255,255,255,0.55); margin-top:6px; font-weight:500; letter-spacing:0.5px;">SEDCAF · HONDURAS</div>
+      </div>
+    </div>
+
+    <div class="badge-hero">🇭🇳 Hecho en Honduras para profesionales forestales</div>
+    <h1>Gestión forestal<br><span>profesional</span>, todo en uno.</h1>
+    <p><strong style="color:rgba(255,255,255,0.95)">SilvaDesk Pro</strong> es el software de escritorio para ingenieros forestales y regentes en Honduras: genera contratos TFC y actas de protocolo ICF, emite facturas, calcula aranceles COLPROFORH, lleva bitácoras de trabajo y visualiza tus predios — todo sin internet, en tu PC.</p>
+    <div class="hero-btns">
+      <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest" class="btn-primary">⬇️ Descargar Gratis — 30 días de prueba</a>
+      <a href="#precios" class="btn-ghost">Ver Precios →</a>
+    </div>
+    <p style="margin-top:14px; font-size:13px; color:rgba(255,255,255,0.5);">
+      Windows 10/11 · ~65 MB · Sin registro · Sin tarjeta
+    </p>
+
+    <div class="hero-screen">
+      <div class="screen-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="screen-title">SilvaDesk Pro v1.3.0 · SEDCAF</span>
+      </div>
+      <div class="screen-body">
+        <div class="mini-card">
+          <div class="mc-icon">📋</div>
+          <div class="mc-label">Actas de Protocolo</div>
+          <div class="mc-val">47</div>
+        </div>
+        <div class="mini-card">
+          <div class="mc-icon">🧾</div>
+          <div class="mc-label">Facturas Emitidas</div>
+          <div class="mc-val">128</div>
+        </div>
+        <div class="mini-card">
+          <div class="mc-icon">💰</div>
+          <div class="mc-label">Ingresos del Mes</div>
+          <div class="mc-val">L.48,200</div>
+        </div>
+        <div class="mini-card">
+          <div class="mc-icon">🌿</div>
+          <div class="mc-label">Arancel Calculado</div>
+          <div class="mc-val">L.3,850</div>
+        </div>
+        <div class="mini-card">
+          <div class="mc-icon">📓</div>
+          <div class="mc-label">Bitácoras TFC</div>
+          <div class="mc-val">23</div>
+        </div>
+        <div class="mini-card">
+          <div class="mc-icon">🗺️</div>
+          <div class="mc-label">Predios Mapeados</div>
+          <div class="mc-val">12</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stat-item reveal">
+    <div class="stat-num">9</div>
+    <div class="stat-lbl">Módulos integrados</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">30</div>
+    <div class="stat-lbl">Días de prueba gratis</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">100%</div>
+    <div class="stat-lbl">Offline, sin internet</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">COLPROFORH</div>
+    <div class="stat-lbl">Arancel 2024 integrado</div>
+  </div>
+</div>
+
+<!-- CÓMO EMPEZAR -->
+<section id="descarga" style="background: var(--gris); padding: 70px 24px;">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:48px;">
+      <div class="section-tag green">Descarga</div>
+      <h2>Empieza en 3 pasos</h2>
+      <p class="section-sub" style="margin:0 auto;">Gratis por 30 días, sin registro ni tarjeta de crédito.</p>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:20px; margin-bottom:40px;">
+      <div style="background:white; border:1px solid var(--borde); border-radius:14px; padding:28px; text-align:center;" class="reveal">
+        <div style="font-size:40px; margin-bottom:12px;">⬇️</div>
+        <div style="font-size:32px; font-weight:900; color:var(--azul); margin-bottom:6px;">1</div>
+        <div style="font-weight:700; font-size:16px; margin-bottom:6px;">Descarga el instalador</div>
+        <div style="font-size:13px; color:var(--muted);">Archivo .exe para Windows 10/11. Sin virus, sin bloatware.</div>
+      </div>
+      <div style="background:white; border:1px solid var(--borde); border-radius:14px; padding:28px; text-align:center;" class="reveal">
+        <div style="font-size:40px; margin-bottom:12px;">⚙️</div>
+        <div style="font-size:32px; font-weight:900; color:var(--azul); margin-bottom:6px;">2</div>
+        <div style="font-weight:700; font-size:16px; margin-bottom:6px;">Instala y configura</div>
+        <div style="font-size:13px; color:var(--muted);">Corre el instalador, ingresa tus datos de empresa y empieza a trabajar.</div>
+      </div>
+      <div style="background:white; border:1px solid var(--borde); border-radius:14px; padding:28px; text-align:center;" class="reveal">
+        <div style="font-size:40px; margin-bottom:12px;">🔑</div>
+        <div style="font-size:32px; font-weight:900; color:var(--azul); margin-bottom:6px;">3</div>
+        <div style="font-weight:700; font-size:16px; margin-bottom:6px;">Activa tu licencia</div>
+        <div style="font-size:13px; color:var(--muted);">Al terminar los 30 días, contáctanos para activar tu licencia permanente.</div>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest"
+         style="display:inline-flex; align-items:center; gap:10px; background:var(--verde); color:white;
+                padding:16px 36px; border-radius:12px; font-size:17px; font-weight:700;
+                text-decoration:none; box-shadow: 0 4px 20px rgba(16,124,16,0.3);
+                transition: background 0.2s;"
+         onmouseover="this.style.background='#0D6B0D'"
+         onmouseout="this.style.background='var(--verde)'">
+        ⬇️ Descargar SilvaDesk Pro v1.3.0
+      </a>
+      <p style="margin-top:12px; font-size:13px; color:var(--muted);">
+        Windows 10 / 11 &nbsp;·&nbsp; ~65 MB &nbsp;·&nbsp; 30 días gratis &nbsp;·&nbsp;
+        <a href="https://github.com/FerArdon/SilvaDeskPro/releases" style="color:var(--azul);">Ver todas las versiones</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section id="modulos">
+  <div class="container">
+    <div class="section-tag">Módulos</div>
+    <h2>Todo lo que necesitas<br>en un solo sistema</h2>
+    <p class="section-sub">Diseñado específicamente para el trabajo forestal en Honduras, con base en la normativa vigente.</p>
+
+    <div class="modulos-grid">
+      <div class="mod-card reveal">
+        <div class="mod-icon">⚖️</div>
+        <div class="mod-name">Protocolo Judicial (FEMA)</div>
+        <div class="mod-desc">Gestión completa de actas de protocolo para la Fiscalía Especial de Medio Ambiente. Generación de documentos Word con firma y registro.</div>
+        <span class="mod-tag">Módulo Premium</span>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-icon">📓</div>
+        <div class="mod-name">Bitácora de Campo (TFC)</div>
+        <div class="mod-desc">Registro cronológico de actividades de campo para Técnicos Forestales Calificados. Exportación a PDF lista para presentar.</div>
+        <span class="mod-tag">Módulo Premium</span>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-icon">🧾</div>
+        <div class="mod-name">Facturador Profesional</div>
+        <div class="mod-desc">Emisión de facturas con datos del emisor, servicios forestales y RTN. Genera PDF profesional con logo y membrete.</div>
+        <span class="mod-tag">Módulo Premium</span>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-icon">🌿</div>
+        <div class="mod-name">Calculadora Arancel COLPROFORH</div>
+        <div class="mod-desc">Cálculo automático de honorarios según el Arancel Oficial 2024 publicado en La Gaceta No. 36,609. Sin errores, sin cálculo manual.</div>
+        <span class="mod-tag free">✓ Siempre gratis</span>
+      </div>
+      <div class="mod-card green reveal">
+        <div class="mod-icon">📊</div>
+        <div class="mod-name">Dashboard Dinámico</div>
+        <div class="mod-desc">Panel de control con resumen de actividad, ingresos, expedientes activos y métricas clave de tu práctica profesional.</div>
+        <span class="mod-tag">Módulo Premium</span>
+      </div>
+      <div class="mod-card green reveal">
+        <div class="mod-icon">🗺️</div>
+        <div class="mod-name">Mapa de Predios</div>
+        <div class="mod-desc">Visualización geoespacial de predios atendidos. Integración con coordenadas GPS para ubicación precisa de cada expediente.</div>
+        <span class="mod-tag">Módulo Premium</span>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-icon">✍️</div>
+        <div class="mod-name">Biblioteca de Contratos</div>
+        <div class="mod-desc">Plantillas de contratos de servicios forestales. Genera documentos Word personalizados con los datos del cliente y el profesional.</div>
+        <span class="mod-tag">Módulo Premium</span>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-icon">💵</div>
+        <div class="mod-name">Finanzas y Pagos</div>
+        <div class="mod-desc">Control de ingresos, pagos pendientes y cobros por proyecto. Reportes financieros para tu práctica forestal.</div>
+        <span class="mod-tag">Módulo Premium</span>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-icon">❓</div>
+        <div class="mod-name">Ayuda TFC</div>
+        <div class="mod-desc">Guías integradas, normativa forestal vigente y procedimientos para Técnicos Forestales Calificados en Honduras.</div>
+        <span class="mod-tag free">✓ Siempre gratis</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARACTERÍSTICAS -->
+<section id="caracteristicas" class="features-bg">
+  <div class="container">
+    <div class="section-tag green">Ventajas</div>
+    <h2>Construido para el<br>profesional forestal hondureño</h2>
+    <p class="section-sub">Funciona sin internet, protege tus datos y cumple con los requisitos legales vigentes.</p>
+
+    <div class="features-grid">
+      <div class="feat reveal">
+        <div class="feat-icon">🔒</div>
+        <div>
+          <div class="feat-title">100% Offline</div>
+          <div class="feat-desc">No requiere internet. Todos tus datos se guardan localmente en tu computadora. Sin servidores externos, sin riesgos de pérdida de datos.</div>
+        </div>
+      </div>
+      <div class="feat reveal">
+        <div class="feat-icon g">📄</div>
+        <div>
+          <div class="feat-title">Documentos Word y PDF</div>
+          <div class="feat-desc">Genera actas, facturas, bitácoras y contratos en formatos estándar listos para imprimir, firmar y presentar ante cualquier institución.</div>
+        </div>
+      </div>
+      <div class="feat reveal">
+        <div class="feat-icon">⚡</div>
+        <div>
+          <div class="feat-title">Licencia de por vida</div>
+          <div class="feat-desc">Pago único, sin suscripciones mensuales. Una vez activada tu licencia es permanente. Actualizaciones de mantenimiento incluidas.</div>
+        </div>
+      </div>
+      <div class="feat reveal">
+        <div class="feat-icon g">🌲</div>
+        <div>
+          <div class="feat-title">Arancel COLPROFORH 2024</div>
+          <div class="feat-desc">Calculadora oficial integrada conforme a La Gaceta No. 36,609 del 10/08/2024. Calcula honorarios correctamente en segundos.</div>
+        </div>
+      </div>
+      <div class="feat reveal">
+        <div class="feat-icon">🖥️</div>
+        <div>
+          <div class="feat-title">Windows 10 y 11</div>
+          <div class="feat-desc">Instalador simple, compatible con Windows 10 y 11. No requiere conocimientos técnicos para instalar y usar.</div>
+        </div>
+      </div>
+      <div class="feat reveal">
+        <div class="feat-icon g">👥</div>
+        <div>
+          <div class="feat-title">Múltiples técnicos asociados</div>
+          <div class="feat-desc">Registra a los TFCs de tu equipo y asígnalos en bitácoras y actas. Ideal para oficinas consultoras con varios profesionales.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section id="precios">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 56px;">
+      <div class="section-tag" style="margin-bottom:12px;">Precios</div>
+      <h2>Licencia de por vida,<br>pago único</h2>
+      <p class="section-sub" style="margin: 0 auto;">Sin suscripciones. Sin renovaciones anuales. Paga una vez y úsalo para siempre.</p>
+    </div>
+
+    <div class="precios-grid">
+
+      <!-- Individual -->
+      <div class="precio-card reveal">
+        <div class="plan-icon">👤</div>
+        <div class="plan-name">Individual</div>
+        <div class="plan-target">Freelancer · Regente independiente</div>
+        <div class="plan-price"><span>L.</span> 2,000</div>
+        <div class="plan-usd">≈ $75 USD · Pago único</div>
+        <hr class="plan-divider">
+        <ul class="plan-feat">
+          <li>1 computadora (1 Hardware ID)</li>
+          <li>Todos los módulos desbloqueados</li>
+          <li>Facturador, Protocolo, Bitácoras ilimitadas</li>
+          <li>Calculadora Arancel COLPROFORH</li>
+          <li>Generación de PDFs y Word</li>
+          <li>Soporte vía WhatsApp</li>
+        </ul>
+        <a href="https://www.paypal.com/ncp/payment/W8SD8LDNYQWEW" target="_blank" rel="noopener" class="plan-btn outline">💳 Pagar con PayPal</a>
+      </div>
+
+      <!-- Profesional (destacado) -->
+      <div class="precio-card featured reveal">
+        <div class="badge-popular">⭐ MÁS POPULAR</div>
+        <div class="plan-icon">🏢</div>
+        <div class="plan-name">Profesional</div>
+        <div class="plan-target">Empresa consultora · Oficina pequeña</div>
+        <div class="plan-price"><span>L.</span> 4,000</div>
+        <div class="plan-usd">≈ $149 USD · Pago único</div>
+        <hr class="plan-divider">
+        <ul class="plan-feat">
+          <li>Hasta 2 computadoras</li>
+          <li>Todos los módulos desbloqueados</li>
+          <li>Técnicos TFC ilimitados</li>
+          <li>Dashboard dinámico completo</li>
+          <li>Mapa de predios</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="https://www.paypal.com/ncp/payment/XHY2RJAHXFV6J" target="_blank" rel="noopener" class="plan-btn primary">💳 Pagar con PayPal</a>
+      </div>
+
+      <!-- Institucional -->
+      <div class="precio-card reveal">
+        <div class="plan-icon">🏛️</div>
+        <div class="plan-name">Institucional</div>
+        <div class="plan-target">ONG · Cooperativa · Empresa grande</div>
+        <div class="plan-price"><span>L.</span> 8,000</div>
+        <div class="plan-usd">≈ $299 USD · Pago único</div>
+        <hr class="plan-divider">
+        <ul class="plan-feat">
+          <li>PCs ilimitadas</li>
+          <li>Todos los módulos desbloqueados</li>
+          <li>Configuración y capacitación incluida</li>
+          <li>Soporte técnico prioritario</li>
+          <li>Personalización de membrete/logo</li>
+          <li>Factura fiscal por la compra</li>
+        </ul>
+        <p style="font-size:11.5px; color:var(--muted); background:#FFF8E1; border:1px solid #F0D97A; border-radius:8px; padding:8px 10px; margin-bottom:10px; text-align:left;">
+          ⚠️ Requiere correo institucional/corporativo (ej. @tuinstitucion.gob.hn). Si tu organización no tiene uno, <a href="#contacto" style="color:var(--azul); font-weight:600;">contáctanos</a> antes de pagar.
+        </p>
+        <a href="https://www.paypal.com/ncp/payment/GTSEW8M8RUU8J" target="_blank" rel="noopener" class="plan-btn outline">💳 Pagar con PayPal</a>
+      </div>
+
+    </div>
+
+    <p class="precio-nota">
+      💡 <strong>Prueba gratuita de 30 días</strong> con acceso completo a todos los módulos — sin tarjeta, sin compromiso.<br>
+      Equivalencias en USD son aproximadas según tasa BCH vigente.
+    </p>
+
+    <!-- Metodologia de pago -->
+    <div style="max-width:760px; margin:56px auto 0; background:white; border:1px solid var(--borde); border-radius:16px; padding:36px 32px;">
+      <div style="text-align:center; margin-bottom:32px;">
+        <div class="section-tag" style="margin-bottom:10px;">¿Cómo se paga?</div>
+        <h3 style="margin:0; font-size:22px;">Proceso simple y directo, sin intermediarios</h3>
+        <p class="section-sub" style="margin:8px auto 0; font-size:14px;">Paga con tarjeta al instante, o por transferencia bancaria — activación personalizada en minutos.</p>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap:18px;">
+        <div style="text-align:center;">
+          <div style="font-size:30px; margin-bottom:8px;">💳</div>
+          <div style="font-weight:700; font-size:14px; margin-bottom:4px;">1. Elige cómo pagar</div>
+          <div style="font-size:12.5px; color:var(--muted);">Paga al instante con tarjeta usando el botón "Pagar con PayPal" de tu plan, o contáctanos por WhatsApp/correo para coordinar transferencia bancaria. Pago único, sin suscripciones ni cargos ocultos.</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:30px; margin-bottom:8px;">🔑</div>
+          <div style="font-weight:700; font-size:14px; margin-bottom:4px;">2. Envíanos tu Hardware ID</div>
+          <div style="font-size:12.5px; color:var(--muted);">Después de pagar, envíanos por WhatsApp o correo el Hardware ID de cada computadora (lo encuentras en el menú "Acerca de" de la aplicación). Plan Individual: 1 clave · Profesional: hasta 2 · Institucional: claves ilimitadas para tu organización.</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:30px; margin-bottom:8px;">⚡</div>
+          <div style="font-weight:700; font-size:14px; margin-bottom:4px;">3. Recibe tu clave</div>
+          <div style="font-size:12.5px; color:var(--muted);">Te generamos y enviamos tu clave de activación en minutos.</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:30px; margin-bottom:8px;">✅</div>
+          <div style="font-weight:700; font-size:14px; margin-bottom:4px;">4. Activa y disfruta</div>
+          <div style="font-size:12.5px; color:var(--muted);">Introduce la clave en la aplicación y tu licencia queda activada de forma permanente en esa computadora.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contacto" class="cta-section">
+  <div class="container" style="text-align:center;">
+    <div class="section-tag" style="background:rgba(255,255,255,0.15); color:white; margin-bottom:16px;">Contacto</div>
+    <h2>¿Listo para comenzar?</h2>
+    <p>Descarga y prueba SilvaDesk Pro gratis por 30 días. Para activar tu licencia, contáctanos y te generamos tu clave en minutos.</p>
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+      <a class="btn-whatsapp" href="https://wa.me/50433527444?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20licencias%20de%20SilvaDesk%20Pro" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="#25D366" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 5L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.85 14.06c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.94-.31-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.55-1.16-2.95 0-1.4.73-2.09 1-2.37.24-.26.53-.32.7-.32.18 0 .35 0 .5.01.16.01.38-.06.6.46.24.55.79 1.9.86 2.04.07.14.11.3.02.49-.09.19-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.45.12.61-.07.16-.19.7-.81.89-1.09.19-.28.38-.23.63-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.33.07.12.07.68-.17 1.36z"/></svg>
+        WhatsApp
+      </a>
+      <a class="cta-contact" href="mailto:sedcaf.consultores@outlook.com">
+        ✉️ sedcaf.consultores@outlook.com
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex; align-items:center; justify-content:center; gap:24px; margin-bottom:14px;">
+    <img src="assets/icon_white.png" alt="SilvaDesk Pro"
+         style="height:38px; width:38px; object-fit:contain; opacity:0.7;">
+    <div style="width:1px; height:30px; background:rgba(255,255,255,0.15);"></div>
+    <img src="assets/logo_sedcaf.png?v=2" alt="SEDCAF"
+         style="height:38px; object-fit:contain; opacity:0.85;">
+  </div>
+  <p>
+    <strong style="color:rgba(255,255,255,0.8)">SilvaDesk Pro v1.3.0</strong> ·
+    SEDCAF – Servicios de Consultoría y Asesoría Forestal · Honduras<br>
+    Ing. FERNANDO RAFAEL ARDÓN RODRÍGUEZ · COLPROFORH N.° 0226<br>
+    <a href="https://github.com/frardonr6/SilvaDeskPro">GitHub</a> ·
+    Desarrollado con Python + CustomTkinter · © 2026 SEDCAF
+  </p>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
+
