@@ -532,18 +532,52 @@
         <div style="font-size:13px; color:var(--muted);">Al terminar los 30 días, contáctanos para activar tu licencia permanente.</div>
       </div>
     </div>
+    <!-- ¿Qué versión necesito? -->
+    <div style="max-width:700px; margin:0 auto 40px; background:white; border:1px solid var(--borde); border-radius:16px; padding:28px 32px;" class="reveal">
+      <div style="font-size:15px; font-weight:800; color:var(--texto); margin-bottom:16px;">🖥️ ¿Cuál versión descargo — 64 bits o 32 bits?</div>
+      <p style="font-size:13.5px; color:var(--muted); margin-bottom:16px;">La mayoría de computadoras modernas usan <strong style="color:var(--texto)">64 bits</strong>. Si no estás seguro, verificalo así en <strong>Windows 10/11</strong>:</p>
+      <div style="background:var(--gris); border-radius:10px; padding:16px 20px; font-size:13px; color:var(--texto); line-height:2;">
+        1. Presiona <kbd style="background:#e2e8f0; border:1px solid #cbd5e1; border-radius:4px; padding:1px 6px; font-family:monospace;">Windows + Pause</kbd> en tu teclado<br>
+        &nbsp;&nbsp;&nbsp;<em style="color:var(--muted);">— o —</em><br>
+        2. Clic derecho en <strong>Este equipo</strong> → <strong>Propiedades</strong><br>
+        3. Busca <strong>"Tipo de sistema"</strong>:
+        <div style="margin-top:10px; display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; align-items:center; gap:10px; background:#E6F4E6; border-radius:8px; padding:10px 14px;">
+            <span style="font-size:20px;">✅</span>
+            <div><strong style="color:var(--verde);">Sistema operativo de 64 bits</strong> → descargá el instalador <strong>64 bits (normal)</strong></div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; background:#FFF3E0; border-radius:8px; padding:10px 14px;">
+            <span style="font-size:20px;">⚠️</span>
+            <div><strong style="color:#E65100;">Sistema operativo de 32 bits</strong> → descargá el instalador <strong>32 bits (x86)</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div style="text-align:center;">
-      <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest"
-         style="display:inline-flex; align-items:center; gap:10px; background:var(--verde); color:white;
-                padding:16px 36px; border-radius:12px; font-size:17px; font-weight:700;
-                text-decoration:none; box-shadow: 0 4px 20px rgba(16,124,16,0.3);
-                transition: background 0.2s;"
-         onmouseover="this.style.background='#0D6B0D'"
-         onmouseout="this.style.background='var(--verde)'">
-        ⬇️ Descargar SilvaDesk Pro v1.3.0
-      </a>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest"
+           style="display:inline-flex; align-items:center; gap:10px; background:var(--verde); color:white;
+                  padding:16px 36px; border-radius:12px; font-size:17px; font-weight:700;
+                  text-decoration:none; box-shadow: 0 4px 20px rgba(16,124,16,0.3);
+                  transition: background 0.2s;"
+           onmouseover="this.style.background='#0D6B0D'"
+           onmouseout="this.style.background='var(--verde)'">
+          ⬇️ Descargar 64 bits (Windows moderno)
+        </a>
+        <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest"
+           id="btn-32bits"
+           style="display:inline-flex; align-items:center; gap:10px; background:white; color:var(--azul-d);
+                  border:2px solid var(--azul); padding:16px 36px; border-radius:12px; font-size:17px;
+                  font-weight:700; text-decoration:none; transition: background 0.2s;"
+           href="https://github.com/FerArdon/SilvaDeskPro/releases/download/v1.3.0/SilvaDeskPro_v1.3.0_Setup_x86.exe"
+           onmouseover="this.style.background='#E8F0FE'"
+           onmouseout="this.style.background='white'">
+          ⬇️ Descargar 32 bits (PC antigua)
+        </a>
+      </div>
       <p style="margin-top:12px; font-size:13px; color:var(--muted);">
-        Windows 10 / 11 &nbsp;·&nbsp; ~65 MB &nbsp;·&nbsp; 30 días gratis &nbsp;·&nbsp;
+        Windows 10 / 11 &nbsp;·&nbsp; 30 días gratis &nbsp;·&nbsp;
         <a href="https://github.com/FerArdon/SilvaDeskPro/releases" style="color:var(--azul);">Ver todas las versiones</a>
       </p>
     </div>
