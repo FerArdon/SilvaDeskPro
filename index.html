@@ -328,6 +328,34 @@
   }
   .precio-nota strong { color: var(--texto); }
 
+  /* ── PRECIOS: TEMA OSCURO ─────────────────────────────────── */
+  #precios { background: #0d1b2e; }
+  #precios .section-tag { color: #4a9eff; }
+  #precios h2 { color: #ffffff; }
+  #precios .section-sub { color: #9db4d0; }
+  #precios .precio-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(74,158,255,0.18);
+  }
+  #precios .precio-card.featured {
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 1px rgba(74,158,255,0.35), 0 8px 32px rgba(74,158,255,0.15);
+  }
+  #precios .plan-name { color: #ffffff; }
+  #precios .plan-target { color: #7f97b8; }
+  #precios .plan-price { color: #4a9eff; }
+  #precios .plan-price.gratis { color: #34d399; }
+  #precios .plan-usd { color: #7f97b8; }
+  #precios .plan-desc { color: #9db4d0; font-size: 14px; line-height: 1.6; margin-top: 8px; margin-bottom: 4px; }
+  #precios .plan-divider { border-top-color: rgba(255,255,255,0.08); }
+  #precios .badge-popular { background: #2e86ff; color: #fff; }
+  #precios .plan-btn.outline { border-color: rgba(255,255,255,0.15); color: #ffffff; }
+  #precios .plan-btn.outline:hover { border-color: #4a9eff; color: #4a9eff; }
+  #precios .plan-btn.primary { background: #2e86ff; box-shadow: 0 4px 16px rgba(46,134,255,0.35); }
+  #precios .plan-btn.primary:hover { background: #1c6fe0; }
+  #precios .precio-nota { color: #7f97b8; }
+  #precios .precio-nota strong { color: #ffffff; }
+
   /* ── CTA FINAL ────────────────────────────────────────────── */
   .cta-section {
     background: linear-gradient(135deg, var(--azul-dd), #004F9F);
@@ -458,7 +486,7 @@
     <h1>Gestión forestal<br><span>profesional</span>, todo en uno.</h1>
     <p><strong style="color:rgba(255,255,255,0.95)">SilvaDesk Pro</strong> es el software de escritorio para ingenieros forestales y regentes en Honduras: genera contratos TFC y actas de protocolo ICF, emite facturas, calcula aranceles COLPROFORH, lleva bitácoras de trabajo y visualiza tus predios — todo sin internet, en tu PC.</p>
     <div class="hero-btns">
-      <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest" class="btn-primary">⬇️ Descargar Gratis — 30 días de prueba</a>
+      <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest" class="btn-primary">⬇️ Descargar Gratis — 10 días de prueba</a>
       <a href="#precios" class="btn-ghost">Ver Precios →</a>
     </div>
     <p style="margin-top:14px; font-size:13px; color:rgba(255,255,255,0.5);">
@@ -534,7 +562,7 @@
     <div style="text-align:center; margin-bottom:48px;">
       <div class="section-tag green">Descarga</div>
       <h2>Empieza en 3 pasos</h2>
-      <p class="section-sub" style="margin:0 auto;">Gratis por 30 días, sin registro ni tarjeta de crédito.</p>
+      <p class="section-sub" style="margin:0 auto;">Gratis por 10 días, sin registro ni tarjeta de crédito.</p>
     </div>
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:20px; margin-bottom:40px;">
       <div style="background:white; border:1px solid var(--borde); border-radius:14px; padding:28px; text-align:center;" class="reveal">
@@ -553,7 +581,7 @@
         <div style="font-size:40px; margin-bottom:12px;">🔑</div>
         <div style="font-size:32px; font-weight:900; color:var(--azul); margin-bottom:6px;">3</div>
         <div style="font-weight:700; font-size:16px; margin-bottom:6px;">Activa tu licencia</div>
-        <div style="font-size:13px; color:var(--muted);">Al terminar los 30 días, contáctanos para activar tu licencia permanente.</div>
+        <div style="font-size:13px; color:var(--muted);">Al terminar los 10 días, contáctanos para activar tu licencia permanente.</div>
       </div>
     </div>
     <!-- ¿Qué versión necesito? -->
@@ -601,7 +629,7 @@
         </a>
       </div>
       <p style="margin-top:12px; font-size:13px; color:var(--muted);">
-        Windows 10 / 11 &nbsp;·&nbsp; 30 días gratis &nbsp;·&nbsp;
+        Windows 10 / 11 &nbsp;·&nbsp; 10 días gratis &nbsp;·&nbsp;
         <a href="https://github.com/FerArdon/SilvaDeskPro/releases" style="color:var(--azul);">Ver todas las versiones</a>
       </p>
     </div>
@@ -734,7 +762,7 @@
     <div style="text-align:center; margin-bottom: 56px;">
       <div class="section-tag" style="margin-bottom:12px;">Precios</div>
       <h2>Elige tu plan de acceso</h2>
-      <p class="section-sub" style="margin: 0 auto;">Empieza gratis 30 días. Sin tarjeta, sin compromiso.</p>
+      <p class="section-sub" style="margin: 0 auto;">Empieza gratis 10 días. Sin tarjeta, sin compromiso.</p>
     </div>
 
     <div class="precios-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
@@ -742,97 +770,65 @@
       <!-- Prueba -->
       <div class="precio-card reveal">
         <div class="plan-icon">🧪</div>
+        <div class="plan-target">10 DÍAS</div>
         <div class="plan-name">Prueba</div>
-        <div class="plan-target">30 días · Sin tarjeta</div>
-        <div class="plan-price" style="color:var(--verde); font-size:36px;">Gratis</div>
-        <div class="plan-usd">Acceso completo sin compromiso</div>
-        <hr class="plan-divider">
-        <ul class="plan-feat">
-          <li>Todos los módulos desbloqueados</li>
-          <li>Facturador, Protocolo, Bitácoras</li>
-          <li>Calculadora COLPROFORH</li>
-        </ul>
+        <div class="plan-price gratis" style="font-size:36px;">Gratis</div>
+        <div class="plan-usd">Sin tarjeta ni registro</div>
+        <p class="plan-desc">Acceso completo para evaluar el sistema sin compromisos.</p>
         <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest" target="_blank" class="plan-btn outline">⬇️ Descargar gratis</a>
       </div>
 
       <!-- Mensual -->
       <div class="precio-card reveal">
         <div class="plan-icon">📅</div>
+        <div class="plan-target">1 MES</div>
         <div class="plan-name">Mensual</div>
-        <div class="plan-target">1 mes · Renovable</div>
-        <div class="plan-price"><span>L.</span>499</div>
-        <div class="plan-usd">≈ $18.63 USD · por mes</div>
-        <hr class="plan-divider">
-        <ul class="plan-feat">
-          <li>Todos los módulos desbloqueados</li>
-          <li>Facturador, Protocolo, Bitácoras</li>
-          <li>Calculadora COLPROFORH</li>
-          <li>Soporte vía WhatsApp</li>
-        </ul>
-        <a href="https://wa.me/50433527444?text=Quiero%20el%20plan%20mensual%20de%20SilvaDesk%20Pro" target="_blank" class="plan-btn outline">💬 Solicitar</a>
+        <div class="plan-price"><span>L</span>499</div>
+        <div class="plan-usd">~$18.63 USD</div>
+        <p class="plan-desc">Ideal para proyectos cortos o periodos de uso puntual.</p>
+        <a href="https://www.paypal.com/ncp/payment/YUXP39BC8UKQN" target="_blank" rel="noopener" class="plan-btn outline">💳 Pagar con PayPal</a>
       </div>
 
-      <!-- Semestral -->
+      <!-- Semestral (destacado) -->
+      <div class="precio-card featured reveal">
+        <div class="badge-popular">⭐ Más popular</div>
+        <div class="plan-icon">🗓️</div>
+        <div class="plan-target">6 MESES</div>
+        <div class="plan-name">Semestral</div>
+        <div class="plan-price"><span>L</span>1,999</div>
+        <div class="plan-usd">~$74.64 USD · Ahorrás 33%</div>
+        <p class="plan-desc">La mejor relación costo-beneficio para uso continuo.</p>
+        <a href="https://www.paypal.com/ncp/payment/VTPR559V42WZ8" target="_blank" rel="noopener" class="plan-btn primary">💳 Pagar con PayPal</a>
+      </div>
+
+      <!-- Anual -->
       <div class="precio-card reveal">
         <div class="plan-icon">📆</div>
-        <div class="plan-name">Semestral</div>
-        <div class="plan-target">6 meses · Ahorrás 33%</div>
-        <div class="plan-price"><span>L.</span>2,000</div>
-        <div class="plan-usd">≈ $74.63 USD · 6 meses</div>
-        <hr class="plan-divider">
-        <ul class="plan-feat">
-          <li>Todos los módulos desbloqueados</li>
-          <li>Facturador, Protocolo, Bitácoras</li>
-          <li>Calculadora COLPROFORH</li>
-          <li>Soporte vía WhatsApp</li>
-        </ul>
-        <a href="https://www.paypal.com/ncp/payment/W8SD8LDNYQWEW" target="_blank" rel="noopener" class="plan-btn outline">💳 Pagar con PayPal</a>
-      </div>
-
-      <!-- Anual destacado -->
-      <div class="precio-card featured reveal">
-        <div class="badge-popular">⭐ MÁS POPULAR</div>
-        <div class="plan-icon">🗓️</div>
+        <div class="plan-target">1 AÑO</div>
         <div class="plan-name">Anual</div>
-        <div class="plan-target">1 año · Ahorrás 33%</div>
-        <div class="plan-price"><span>L.</span>4,000</div>
-        <div class="plan-usd">≈ $149.25 USD · 12 meses</div>
-        <hr class="plan-divider">
-        <ul class="plan-feat">
-          <li>Todos los módulos desbloqueados</li>
-          <li>Facturador, Protocolo, Bitácoras</li>
-          <li>Calculadora COLPROFORH</li>
-          <li>Soporte prioritario</li>
-          <li>Actualizaciones incluidas</li>
-        </ul>
-        <a href="https://www.paypal.com/ncp/payment/XHY2RJAHXFV6J" target="_blank" rel="noopener" class="plan-btn primary">💳 Pagar con PayPal</a>
+        <div class="plan-price"><span>L</span>3,499</div>
+        <div class="plan-usd">~$130.66 USD · Ahorrás 42%</div>
+        <p class="plan-desc">Cobertura completa por todo el año, sin interrupciones.</p>
+        <a href="https://www.paypal.com/ncp/payment/EUREU95XHJTZY" target="_blank" rel="noopener" class="plan-btn outline">💳 Pagar con PayPal</a>
       </div>
 
       <!-- Permanente -->
       <div class="precio-card reveal">
         <div class="plan-icon">♾️</div>
+        <div class="plan-target">PAGO ÚNICO</div>
         <div class="plan-name">Permanente</div>
-        <div class="plan-target">Pago único · Para siempre</div>
-        <div class="plan-price"><span>L.</span>8,000</div>
-        <div class="plan-usd">≈ $298.50 USD · única vez</div>
-        <hr class="plan-divider">
-        <ul class="plan-feat">
-          <li>Todos los módulos desbloqueados</li>
-          <li>Facturador, Protocolo, Bitácoras</li>
-          <li>Calculadora COLPROFORH</li>
-          <li>Soporte prioritario</li>
-          <li>Todas las actualizaciones</li>
-          <li>Sin renovaciones nunca</li>
-        </ul>
-        <div id="paypal-container-X7FTGT5GCXKUJ"></div>
+        <div class="plan-price"><span>L</span>5,999</div>
+        <div class="plan-usd">~$224.00 USD</div>
+        <p class="plan-desc">Paga una vez, úsala para siempre. Sin renovaciones.</p>
+        <div id="paypal-container-DHGUY3XXPCJVC"></div>
       </div>
 
     </div>
 
     <script>
       paypal.HostedButtons({
-        hostedButtonId: "X7FTGT5GCXKUJ",
-      }).render("#paypal-container-X7FTGT5GCXKUJ");
+        hostedButtonId: "DHGUY3XXPCJVC",
+      }).render("#paypal-container-DHGUY3XXPCJVC");
     </script>
 
     <p class="precio-nota">
@@ -878,7 +874,7 @@
   <div class="container" style="text-align:center;">
     <div class="section-tag" style="background:rgba(255,255,255,0.15); color:white; margin-bottom:16px;">Contacto</div>
     <h2>¿Listo para comenzar?</h2>
-    <p>Descarga y prueba SilvaDesk Pro gratis por 30 días. Para activar tu licencia, contáctanos y te generamos tu clave en minutos.</p>
+    <p>Descarga y prueba SilvaDesk Pro gratis por 10 días. Para activar tu licencia, contáctanos y te generamos tu clave en minutos.</p>
     <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
       <a class="btn-whatsapp" href="https://wa.me/50433527444?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20licencias%20de%20SilvaDesk%20Pro" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="#25D366" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 5L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.85 14.06c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.94-.31-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.55-1.16-2.95 0-1.4.73-2.09 1-2.37.24-.26.53-.32.7-.32.18 0 .35 0 .5.01.16.01.38-.06.6.46.24.55.79 1.9.86 2.04.07.14.11.3.02.49-.09.19-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.45.12.61-.07.16-.19.7-.81.89-1.09.19-.28.38-.23.63-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.33.07.12.07.68-.17 1.36z"/></svg>
