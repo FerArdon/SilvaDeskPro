@@ -7,6 +7,7 @@
 <meta name="description" content="Software profesional de gestión forestal para ingenieros, regentes y consultores en Honduras. Facturador, Protocolo FEMA, Bitácora TFC, Calculadora COLPROFORH.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://www.paypal.com/sdk/js?client-id=BAAFydOCwG0JSNM1bS9RfWuZgVhdHMJy23WslrJjAKJDQ1rpGhxjp8wI6nykPinYw6T4WgMOPKfqCHkwjE&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
 <style>
   :root {
     --azul:    #0078D4;
@@ -383,6 +384,29 @@
     .stat-item { padding: 20px 24px; }
     section { padding: 60px 20px; }
     .features-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── BOTÓN FLOTANTE WHATSAPP ─────────────────────────────── */
+  .wa-float-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    z-index: 9999;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .wa-float-btn:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(37,211,102,0.5); }
+  @media(max-width:600px){
+    .wa-float-btn { width: 52px; height: 52px; bottom: 16px; right: 16px; }
+    .wa-float-btn svg { width: 24px; height: 24px; }
   }
 </style>
 </head>
@@ -762,7 +786,7 @@
           <li>Calculadora COLPROFORH</li>
           <li>Soporte vía WhatsApp</li>
         </ul>
-        <a href="https://wa.me/50433527444?text=Quiero%20el%20plan%20semestral%20de%20SilvaDesk%20Pro" target="_blank" class="plan-btn outline">💬 Solicitar</a>
+        <a href="https://www.paypal.com/ncp/payment/W8SD8LDNYQWEW" target="_blank" rel="noopener" class="plan-btn outline">💳 Pagar con PayPal</a>
       </div>
 
       <!-- Anual destacado -->
@@ -781,7 +805,7 @@
           <li>Soporte prioritario</li>
           <li>Actualizaciones incluidas</li>
         </ul>
-        <a href="https://wa.me/50433527444?text=Quiero%20el%20plan%20anual%20de%20SilvaDesk%20Pro" target="_blank" class="plan-btn primary">💬 Solicitar</a>
+        <a href="https://www.paypal.com/ncp/payment/XHY2RJAHXFV6J" target="_blank" rel="noopener" class="plan-btn primary">💳 Pagar con PayPal</a>
       </div>
 
       <!-- Permanente -->
@@ -800,10 +824,16 @@
           <li>Todas las actualizaciones</li>
           <li>Sin renovaciones nunca</li>
         </ul>
-        <a href="https://wa.me/50433527444?text=Quiero%20la%20licencia%20permanente%20de%20SilvaDesk%20Pro" target="_blank" class="plan-btn outline">💬 Solicitar</a>
+        <div id="paypal-container-X7FTGT5GCXKUJ"></div>
       </div>
 
     </div>
+
+    <script>
+      paypal.HostedButtons({
+        hostedButtonId: "X7FTGT5GCXKUJ",
+      }).render("#paypal-container-X7FTGT5GCXKUJ");
+    </script>
 
     <p class="precio-nota">
       💡 Equivalencias en USD aproximadas según tasa BCH vigente. &nbsp;·&nbsp; Pagos por transferencia bancaria o coordinación directa con el desarrollador.<br>
@@ -890,6 +920,21 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<!-- Botón flotante de WhatsApp -->
+<a href="#" id="waFloatBtn" class="wa-float-btn" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" width="28" height="28" fill="#fff" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 5L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.85 14.06c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.94-.31-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.55-1.16-2.95 0-1.4.73-2.09 1-2.37.24-.26.53-.32.7-.32.18 0 .35 0 .5.01.16.01.38-.06.6.46.24.55.79 1.9.86 2.04.07.14.11.3.02.49-.09.19-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.45.12.61-.07.16-.19.7-.81.89-1.09.19-.28.38-.23.63-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.33.07.12.07.68-.17 1.36z"/></svg>
+</a>
+<script>
+  // Botón flotante de WhatsApp (número ofuscado)
+  (function(){
+    var c = [53,48,52,51,51,53,50,55,52,52,52];
+    var n = String.fromCharCode.apply(null, c);
+    var msg = encodeURIComponent('Hola, quiero información sobre SilvaDesk Pro');
+    var b = document.getElementById('waFloatBtn');
+    if (b) b.href = 'https://wa.me/' + n + '?text=' + msg;
+  })();
 </script>
 </body>
 </html>
