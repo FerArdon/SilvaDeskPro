@@ -502,6 +502,17 @@
       Windows 10/11 · ~65 MB · Sin registro · Sin tarjeta
     </p>
 
+    <div style="display:flex; gap:36px; margin-top:28px; flex-wrap:wrap;">
+      <div>
+        <div style="font-size:1.9rem; font-weight:800; color:#fff;" id="counter-visitas">—</div>
+        <div style="font-size:.8rem; color:rgba(255,255,255,0.6);">Visitas al sitio</div>
+      </div>
+      <div>
+        <div style="font-size:1.9rem; font-weight:800; color:#fff;" id="counter-descargas">—</div>
+        <div style="font-size:.8rem; color:rgba(255,255,255,0.6);">Descargas</div>
+      </div>
+    </div>
+
     <div class="hero-screen">
       <div class="screen-bar">
         <div class="dot dot-r"></div>
@@ -905,17 +916,13 @@
     SEDCAF – Servicios de Consultoría y Asesoría Forestal · Honduras<br>
     Ing. FERNANDO RAFAEL ARDÓN RODRÍGUEZ · COLPROFORH N.° 0226<br>
     <a href="https://github.com/frardonr6/SilvaDeskPro">GitHub</a> ·
-    Desarrollado con Python + CustomTkinter · © 2026 SEDCAF<br>
-    <span style="font-size:13px;opacity:.7;">
-      👁️ <span id="counter-visitas">—</span> visitas ·
-      ⬇️ <span id="counter-descargas">—</span> descargas
-    </span>
+    Desarrollado con Python + CustomTkinter · © 2026 SEDCAF
   </p>
 </footer>
 
 <script>
-  // Contador de visitas gratuito (countapi.xyz)
-  fetch('https://api.countapi.xyz/hit/ferardon.github.io-silvadeskpro/visits')
+  // Contador de visitas gratuito (abacus)
+  fetch('https://abacus.jasoncameron.dev/hit/ferardon.github.io-silvadeskpro/visits')
     .then(r => r.json())
     .then(data => {
       var el = document.getElementById('counter-visitas');
