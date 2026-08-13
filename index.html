@@ -7,6 +7,16 @@
 <meta name="description" content="Software profesional de gestión forestal para ingenieros, regentes y consultores en Honduras. Facturador, Protocolo FEMA, Bitácora TFC, Calculadora COLPROFORH.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K9789WN832"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K9789WN832');
+</script>
+
 <style>
   :root {
     --azul:    #0078D4;
@@ -485,7 +495,7 @@
     <h1>Gestión forestal<br><span>profesional</span>, todo en uno.</h1>
     <p><strong style="color:rgba(255,255,255,0.95)">SilvaDesk Pro</strong> es el software de escritorio para ingenieros forestales y regentes en Honduras: genera contratos TFC y actas de protocolo ICF, emite facturas, calcula aranceles COLPROFORH, lleva bitácoras de trabajo y visualiza tus predios — todo sin internet, en tu PC.</p>
     <div class="hero-btns">
-      <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest" class="btn-primary">⬇️ Descargar Gratis — 10 días de prueba</a>
+      <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest" class="btn-primary" onclick="gtag('event','download_click',{product:'SilvaDeskPro', location:'hero'})">⬇️ Descargar Gratis — 10 días de prueba</a>
       <a href="#precios" class="btn-ghost">Ver Precios →</a>
     </div>
     <p style="margin-top:14px; font-size:13px; color:rgba(255,255,255,0.5);">
@@ -613,17 +623,18 @@
                   text-decoration:none; box-shadow: 0 4px 20px rgba(16,124,16,0.3);
                   transition: background 0.2s;"
            onmouseover="this.style.background='#0D6B0D'"
-           onmouseout="this.style.background='var(--verde)'">
+           onmouseout="this.style.background='var(--verde)'"
+           onclick="gtag('event','download_click',{product:'SilvaDeskPro', variant:'64bit'})">
           ⬇️ Descargar 64 bits (Windows moderno)
         </a>
-        <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest"
+        <a href="https://github.com/FerArdon/SilvaDeskPro/releases/download/v1.5.0/SilvaDeskPro_v1.5.0_Setup_x86.exe"
            id="btn-32bits"
            style="display:inline-flex; align-items:center; gap:10px; background:white; color:var(--azul-d);
                   border:2px solid var(--azul); padding:16px 36px; border-radius:12px; font-size:17px;
                   font-weight:700; text-decoration:none; transition: background 0.2s;"
-           href="https://github.com/FerArdon/SilvaDeskPro/releases/download/v1.5.0/SilvaDeskPro_v1.5.0_Setup_x86.exe"
            onmouseover="this.style.background='#E8F0FE'"
-           onmouseout="this.style.background='white'">
+           onmouseout="this.style.background='white'"
+           onclick="gtag('event','download_click',{product:'SilvaDeskPro', variant:'32bit'})">
           ⬇️ Descargar 32 bits (PC antigua)
         </a>
       </div>
@@ -774,7 +785,7 @@
         <div class="plan-price gratis" style="font-size:36px;">Gratis</div>
         <div class="plan-usd">Sin tarjeta ni registro</div>
         <p class="plan-desc">Acceso completo para evaluar el sistema sin compromisos.</p>
-        <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest" target="_blank" class="plan-btn outline">⬇️ Descargar gratis</a>
+        <a href="https://github.com/FerArdon/SilvaDeskPro/releases/latest" target="_blank" class="plan-btn outline" onclick="gtag('event','download_click',{product:'SilvaDeskPro', location:'planes'})">⬇️ Descargar gratis</a>
       </div>
 
       <!-- Mensual -->
@@ -894,9 +905,42 @@
     SEDCAF – Servicios de Consultoría y Asesoría Forestal · Honduras<br>
     Ing. FERNANDO RAFAEL ARDÓN RODRÍGUEZ · COLPROFORH N.° 0226<br>
     <a href="https://github.com/frardonr6/SilvaDeskPro">GitHub</a> ·
-    Desarrollado con Python + CustomTkinter · © 2026 SEDCAF
+    Desarrollado con Python + CustomTkinter · © 2026 SEDCAF<br>
+    <span style="font-size:13px;opacity:.7;">
+      👁️ <span id="counter-visitas">—</span> visitas ·
+      ⬇️ <span id="counter-descargas">—</span> descargas
+    </span>
   </p>
 </footer>
+
+<script>
+  // Contador de visitas gratuito (countapi.xyz)
+  fetch('https://api.countapi.xyz/hit/ferardon.github.io-silvadeskpro/visits')
+    .then(r => r.json())
+    .then(data => {
+      var el = document.getElementById('counter-visitas');
+      if (el) el.textContent = data.value ? data.value.toLocaleString('es-HN') : '1';
+    })
+    .catch(() => {
+      var el = document.getElementById('counter-visitas');
+      if (el) el.textContent = '—';
+    });
+
+  // Descargas reales desde GitHub Releases API
+  fetch('https://api.github.com/repos/FerArdon/SilvaDeskPro/releases')
+    .then(r => r.json())
+    .then(releases => {
+      var total = releases.reduce(function(sum, rel) {
+        return sum + rel.assets.reduce(function(s, a) { return s + a.download_count; }, 0);
+      }, 0);
+      var el = document.getElementById('counter-descargas');
+      if (el) el.textContent = total.toLocaleString('es-HN');
+    })
+    .catch(() => {
+      var el = document.getElementById('counter-descargas');
+      if (el) el.textContent = '—';
+    });
+</script>
 
 <script>
   // Reveal on scroll
